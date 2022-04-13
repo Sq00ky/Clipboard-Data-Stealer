@@ -16,7 +16,7 @@ With that said, please use this program responsibily <3
 <img src='https://raw.githubusercontent.com/Sq00ky/Clipboard-Data-Stealer/main/main.png'></img>
 
 ### Complication Instructions
-This software can be compiled with Visual Studio Code 2019 as a 32-bit or 64-bit program. Before changing, ensure you set the IP Address or Domain Name in the URL string to a device you control or else data will not be logged. Who needs disk-based artifacts!? It's 2022!
+This code can be compiled with Visual Studio Code 2019 as a 32-bit or 64-bit program. Before compiling, ensure you set the IP Address or Domain Name in the URL string to a device you control or else data will not be logged. Who needs disk-based artifacts!? It's 2022!
 
 ### Known Issues
 Currently, non-ascii data (ex. Pictures) will crash the program. I have no idea why. Maybe I'll fix it one day? I'm not exactly sure what's wrong :(
